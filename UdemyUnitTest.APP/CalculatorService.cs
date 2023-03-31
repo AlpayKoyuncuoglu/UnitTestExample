@@ -16,6 +16,10 @@ namespace UdemyUnitTest.APP
 
         public int multip(int a, int b)
         {
+            if (a == b)
+            {
+                throw new Exception("a=0 olamaz");
+            }
             return a * b;
         }
     }

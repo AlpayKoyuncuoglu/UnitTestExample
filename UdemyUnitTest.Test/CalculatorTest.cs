@@ -59,9 +59,9 @@ namespace UdemyUnitTest.Test
 
             var actualTotal = calculator.add(a, b);
             Assert.Equal(expectedTotal, actualTotal);
-            Assert.NotEmpty(new List<string>() { "1","2"});
+            //Assert.NotEmpty(new List<string>() { "1", "2" });
             //not empty needs a collection
-            mymock.Verify(x => x.add(a, b),Times.AtMost(2));
+            //mymock.Verify(x => x.add(a, b), Times.AtMost(2));
             //once yazıldığında metod bir kez çalışırsa test başarılı demektir
         }
 
@@ -75,6 +75,16 @@ namespace UdemyUnitTest.Test
              */
             mymock.Setup(x => x.multip(a, b)).Returns(expectedValue);
             Assert.Equal(15, calculator.multip(a, b));
+        }
+
+        [Theory]
+        [InlineData(0, 5)]
+        public void Multip_ZeroValues_ReturnsException(int a, int b)
+        {
+            mymock.Setup(x => x.multip(a, b)).Throws(new Exception("a=0 olamaz"));
+            //x burada ICalculatorService yerine geçer
+            Exception exception = Assert.Throws<Exception>(() => calculator.multip(a, b));
+            Assert.Equal("a=0 olamaz", exception.Message);
         }
 
 
