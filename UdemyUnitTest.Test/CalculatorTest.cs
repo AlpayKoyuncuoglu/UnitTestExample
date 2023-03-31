@@ -59,6 +59,10 @@ namespace UdemyUnitTest.Test
 
             var actualTotal = calculator.add(a, b);
             Assert.Equal(expectedTotal, actualTotal);
+            Assert.NotEmpty(new List<string>() { "1","2"});
+            //not empty needs a collection
+            mymock.Verify(x => x.add(a, b),Times.AtMost(2));
+            //once yazıldığında metod bir kez çalışırsa test başarılı demektir
         }
 
         [Theory]
