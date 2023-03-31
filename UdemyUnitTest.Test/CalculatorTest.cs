@@ -73,8 +73,16 @@ namespace UdemyUnitTest.Test
             /*yukarıdaki satırda şunu ifade eder;y
             a ve b değerleri ne olursa olsun döncecek sonuç 10'dur
              */
-            mymock.Setup(x => x.multip(a, b)).Returns(expectedValue);
-            Assert.Equal(15, calculator.multip(a, b));
+            //mymock.Setup(x => x.multip(a, b)).Returns(expectedValue);
+            int actualMultip = 0;
+            mymock.Setup(x => x.multip(It.IsAny<int>(), It.IsAny<int>()))
+                .Callback<int, int>((x, y) => actualMultip = x * y);
+            //.Returns(expectedValue);
+            calculator.multip(a, b);
+
+            //Assert.Equal(15, calculator.multip(a, b));
+            Assert.Equal(expectedValue, actualMultip);
+            Assert.Equal(expectedValue, calculator.multip(2, 5));
         }
 
         [Theory]
