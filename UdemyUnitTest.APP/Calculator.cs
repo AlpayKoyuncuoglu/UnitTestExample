@@ -16,6 +16,8 @@ namespace UdemyUnitTest.APP
 
         public int add(int a, int b)
         {
+            //_calculatorService.add(a, b);
+            //metod burada tekrar ettirilerek test metodun içimde en az 2 kez çalışması test edildi
             return _calculatorService.add(a, b);
             //if (a == 0 || b == 0)
             //{
